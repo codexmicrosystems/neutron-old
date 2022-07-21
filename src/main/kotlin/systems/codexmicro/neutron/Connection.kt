@@ -7,26 +7,28 @@
  *
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  *
- * Created: July 20, 2022
- * Updated: July 20, 2022
+ * Created: July 21, 2022
+ * Updated: July 21, 2022
  */
+
+import com.fazecast.jSerialComm.SerialPort
+import systems.codexmicro.neutron.SerialConnection
+import systems.codexmicro.neutron.util.ConnectionType
 
 package systems.codexmicro.neutron
 
-interface Connection {
-    fun defaultConfig() {}
+class Connection(connectionType: ConnectionType, serialPort: SerialPort) {
+    private var connectionType: ConnectionType
 
-    fun openConnection() {}
+    init {
+        this.connectionType = connectionType
 
-    fun closeConnection() {}
+        // TODO: Error handling
 
-    fun writeBytes() {}
-
-    fun writeString() {}
-
-    fun readBytes() {}
-
-    fun readString() {}
-
-    fun clearBuffer() {}
+        if (connectionType == ConnectionType.SERIAL) {
+            var serialConnection: SerialConnection = SerialConnection(serialPort.toString())
+        } else if (connectionType == ConnectionType.ETHERNET) {
+            // var ethernetConnection: EthernetConnection = EthernetConnection(ethernetAddress.toString())
+        }
+    }
 }

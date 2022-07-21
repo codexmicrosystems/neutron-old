@@ -4,14 +4,14 @@
 Neutron is a Kotlin/Java library that allows for control of scientific measurement instruments over various forms of connections and buses.
 
 ### Usage
-Step 1, add the jitpack repository to your gradle build file.
+Step 1, add the JitPack repository to your gradle build file.
 ```gradle
 repositories {
 	maven { url 'https://jitpack.io' }
 }
 ```
 
-Step 2, add the dependency to your build file.
+Step 2, add the dependency to your gradle build file.
 ```gradle
 dependencies {
 	implementation("com.github.codexmicrosystems:neutron:main-SNAPSHOT")

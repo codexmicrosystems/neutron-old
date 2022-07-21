@@ -23,7 +23,7 @@ import systems.codexmicro.neutron.util.FlowControl
 import systems.codexmicro.neutron.util.ParityType
 import systems.codexmicro.neutron.util.StopBits
 
-class SerialConnection(serialPort: String) : Connection {
+class SerialConnection(serialPort: String) {
     private var commPort: SerialPort
     private lateinit var inputStream: BufferedReader
     private lateinit var outputStream: BufferedWriter
