@@ -13,12 +13,12 @@
 
 package systems.codexmicro.neutron.util
 
-enum ParityType(value: Int) {
+enum class ParityType(value: Int) {
     NONE(0),
     ODD(1),
     EVEN(2),
     MARK(3),
-    SPACE(4)
+    SPACE(4);
 
     private var value: Int
 
@@ -31,10 +31,10 @@ enum ParityType(value: Int) {
     }
 }
 
-enum StopBits(value: Int) {
+enum class StopBits(value: Int) {
     ONE(10),
     ONE_HALF(15),
-    TWO(20)
+    TWO(20);
 
     private var value: Int
 
@@ -47,11 +47,11 @@ enum StopBits(value: Int) {
     }
 }
 
-enum FlowControl(value: Int) {
+enum class FlowControl(value: Int) {
     NONE(0),
     XON_XOFF(1),
     RTS_CTS(2),
-    DTR_DSR(4)
+    DTR_DSR(4);
 
     private var value: Int
 

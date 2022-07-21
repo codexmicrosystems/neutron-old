@@ -26,7 +26,7 @@ import javax.script.ScriptException
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.TimeUnit
 import java.nio.charset.Charset
-import systems.codexmicro.gpiblib.util.ReadTerminator
+import systems.codexmicro.neutron.util.ReadTerminator
 
 class PrologixEthernet(prologixURL: URL) {
     private var prologixURL: URL
@@ -80,7 +80,7 @@ class PrologixEthernet(prologixURL: URL) {
         }
     }
 
-    private var readBytes: LinkedBlockingQueue<Byte> = LinkedBlockingQueue<>()
+    private var readBytes: LinkedBlockingQueue<Byte> = LinkedBlockingQueue<Byte>()
 
     private fun prologixReadByte(timeoutMs: Long): Byte {
         var byteRead: Byte = this.readBytes.poll(timeoutMs, TimeUnit.MILLISECONDS)
@@ -88,7 +88,7 @@ class PrologixEthernet(prologixURL: URL) {
     }
 
     fun prologixClearReadBuffer() {
-        var drainedBytes: List<Byte> = ArrayList<>()
+        var drainedBytes: List<Byte> = ArrayList<Byte>()
         this.readBytes.drainTo(drainedBytes.toMutableList())
         if (!drainedBytes.isEmpty()) {
             var bytes: ByteArray = ByteArray(drainedBytes.size.toInt())
@@ -100,7 +100,7 @@ class PrologixEthernet(prologixURL: URL) {
     }
 
     private fun prologixWriteRaw(bytes: ByteArray) {
-        prologixURLConnection: URLConnection = this.prologixURLConnection
+        var prologixURLConnection: URLConnection = this.prologixURLConnection
         this.prologixURLConnection.getOutputStream().write(bytes)
     }
 

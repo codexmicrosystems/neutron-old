@@ -19,9 +19,9 @@ import java.io.BufferedWriter
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
-import systems.codexmicro.gpiblib.util.FlowControl
-import systems.codexmicro.gpiblib.util.ParityType
-import systems.codexmicro.gpiblib.util.StopBits
+import systems.codexmicro.neutron.util.FlowControl
+import systems.codexmicro.neutron.util.ParityType
+import systems.codexmicro.neutron.util.StopBits
 
 class SerialConnection(serialPort: String) : Connection {
     private var commPort: SerialPort
