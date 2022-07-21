@@ -1,6 +1,6 @@
 ![(Neutron Logo)](https://raw.githubusercontent.com/codexmicrosystems/brand-guidelines/main/logo/neutron-logo.png)
 
-Scientific instrument control made simple.
+Neutron is a kotlin/java library that allows for scientific measurement instrument control over various forms of connections.
 
 ### Usage
 Step 1, add the jitpack repository to your gradle build file.
@@ -13,7 +13,7 @@ repositories {
 Step 2, add the dependency to your build file.
 ```gradle
 dependencies {
-	implementation("com.github.codexmicrosystems:neutron:master-SNAPSHOT")
+	implementation("com.github.codexmicrosystems:neutron:main-SNAPSHOT")
 }
 ```
 
