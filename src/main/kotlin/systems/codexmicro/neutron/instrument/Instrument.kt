@@ -8,10 +8,12 @@
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  *
  * Created: July 06, 2022
- * Updated: July 19, 2022
+ * Updated: July 21, 2022
  */
 
-package systems.codexmicro.neutron
+package systems.codexmicro.neutron.instrument
+
+import systems.codexmicro.neutron.BusAddress
 
 class Instrument(instrumentName: String, busAddress: BusAddress) {
     private var instrumentName: String

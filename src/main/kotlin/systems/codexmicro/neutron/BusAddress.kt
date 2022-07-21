@@ -8,7 +8,7 @@
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  *
  * Created: July 06, 2022
- * Updated: July 19, 2022
+ * Updated: July 21, 2022
  */
 
 package systems.codexmicro.neutron
@@ -62,9 +62,9 @@ class BusAddress(busAddressPrimary: Byte, busAddressSecondary: Byte) {
 
     fun getBusAddressURL(): String {
         if (hasBusAddressSecondary()) {
-            busAddressURL = "GPIB:" + this.busAddressPrimary + "," + this.busAddressSecondary
+            busAddressURL = "GPIB::" + this.busAddressPrimary + "," + this.busAddressSecondary
         } else {
-            busAddressURL = "GPIB:" + this.busAddressPrimary
+            busAddressURL = "GPIB::" + this.busAddressPrimary
         }
         return busAddressURL
     }
