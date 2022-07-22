@@ -7,7 +7,7 @@ Neutron is a Kotlin/Java library that allows for control of scientific measureme
 Step 1, add the JitPack repository to your gradle build file.
 ```gradle
 repositories {
-	maven { url 'https://jitpack.io' }
+	maven { url = uri("https://jitpack.io") }
 }
 ```
 
