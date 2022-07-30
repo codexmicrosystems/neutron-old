@@ -11,7 +11,7 @@
  * Updated: July 21, 2022
  */
 
-package systems.codexmicro.neutron.util
+package systems.codexmicro.neutron.connection
 
 enum class ConnectionType(connectionType: String) {
     SERIAL("Serial"),

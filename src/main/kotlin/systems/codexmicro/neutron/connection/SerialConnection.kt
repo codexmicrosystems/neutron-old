@@ -11,7 +11,7 @@
  * Updated: July 20, 2022
  */
 
-package systems.codexmicro.neutron
+package systems.codexmicro.neutron.connection
 
 import com.fazecast.jSerialComm.SerialPort
 import java.io.BufferedReader
@@ -79,9 +79,23 @@ class SerialConnection(serialPort: String) {
         serialPort.closePort()
     }
 
-    fun writeBytes(bytes: ByteArray) {}
+    fun writeBytes(bytes: ByteArray) {
+        commPort.getOutputStream()
 
-    fun writeString() {}
+        try {
+            commPort.writeBytes(bytes, bytes.count().toLong())
+        } catch (e: IOException) {
+            throw IOException("ERROR: Could not Write Bytes")
+        }
+    }
+
+    fun writeString(string: String) {
+        try {
+            commPort.writeBytes(string.toByteArray(), string.count().toLong())
+        } catch (e: IOException) {
+            throw IOException("ERROR: Could not Write String")
+        }
+    }
 
     fun readBytes(bufferSize: Int): ByteArray {}
 

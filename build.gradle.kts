@@ -8,9 +8,6 @@ plugins {
     `java-library`
 }
 
-group = "com.github.codexmicrosystems"
-version = "1.0.0"
-
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -37,3 +34,15 @@ dependencies {
 
     implementation("com.fazecast:jSerialComm:[2.0.0,3.0.0)")
 }
+
+publishing {
+    publications {
+      create<MavenPublication>("maven") {
+        groupId = "com.github.zagdrath"
+        artifactId = "neutron"
+        version = "1.0.0"
+  
+        from(components["java"])
+      }
+    }
+  }

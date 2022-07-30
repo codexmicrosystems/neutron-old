@@ -12,10 +12,10 @@
  */
 
 import com.fazecast.jSerialComm.SerialPort
-import systems.codexmicro.neutron.SerialConnection
-import systems.codexmicro.neutron.util.ConnectionType
+import systems.codexmicro.neutron.connection.SerialConnection
+import systems.codexmicro.neutron.connection.ConnectionType
 
-package systems.codexmicro.neutron
+package systems.codexmicro.neutron.connection
 
 class Connection(connectionType: ConnectionType, serialPort: SerialPort) {
     private var connectionType: ConnectionType

@@ -11,7 +11,7 @@
  * Updated: July 21, 2022
  */
 
-package systems.codexmicro.neutron
+package systems.codexmicro.neutron.address
 
 class BusAddress(busAddressPrimary: Byte, busAddressSecondary: Byte) {
     private lateinit var busAddressURL: String
