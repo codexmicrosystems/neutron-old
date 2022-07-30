@@ -8,15 +8,22 @@
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  *
  * Created: July 07, 2022
- * Updated: July 19, 2022
+ * Updated: July 29, 2022
  */
 
 package systems.codexmicro.neutron.util
 
-enum class ReadTerminator {
-    CR,
-    LF,
-    CR_LF,
-    OPTCR_LF,
-    LF_CR
+enum class Terminator(value: Byte) {
+    CR(13),
+    LF(10);
+
+    private var value: Byte
+
+    init {
+        this.value = value
+    }
+
+    fun toByte(): Byte {
+        return value
+    }
 }

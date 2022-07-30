@@ -8,7 +8,7 @@
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  *
  * Created: July 20, 2022
- * Updated: July 20, 2022
+ * Updated: July 29, 2022
  */
 
 package systems.codexmicro.neutron.connection
@@ -22,6 +22,7 @@ import java.io.OutputStreamWriter
 import systems.codexmicro.neutron.util.FlowControl
 import systems.codexmicro.neutron.util.ParityType
 import systems.codexmicro.neutron.util.StopBits
+import systems.codexmicro.neutron.util.Terminator
 
 class SerialConnection(serialPort: String) {
     private var commPort: SerialPort
@@ -80,8 +81,7 @@ class SerialConnection(serialPort: String) {
     }
 
     fun writeBytes(bytes: ByteArray) {
-        commPort.getOutputStream()
-
+        // TODO: Write bytes to output stream instead?
         try {
             commPort.writeBytes(bytes, bytes.count().toLong())
         } catch (e: IOException) {
@@ -95,6 +95,14 @@ class SerialConnection(serialPort: String) {
         } catch (e: IOException) {
             throw IOException("ERROR: Could not Write String")
         }
+    }
+
+    fun terminateBytes(bytes: ByteArray, terminator: Terminator): ByteArray {
+        return bytes + terminator.toByte()
+    }
+
+    fun terminateString(string: String, terminator: Terminator): ByteArray {
+        return terminateBytes(string.toByteArray(), terminator)
     }
 
     fun readBytes(bufferSize: Int): ByteArray {}
