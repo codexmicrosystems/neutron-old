@@ -8,7 +8,7 @@
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  *
  * Created: July 20, 2022
- * Updated: July 29, 2022
+ * Updated: August 05, 2022
  */
 
 package systems.codexmicro.neutron.connection
@@ -81,9 +81,8 @@ class SerialConnection(serialPort: String) {
     }
 
     fun writeBytes(bytes: ByteArray) {
-        // TODO: Write bytes to output stream instead?
         try {
-            commPort.writeBytes(bytes, bytes.count().toLong())
+            commPort.getOutputStream().write(bytes)
         } catch (e: IOException) {
             throw IOException("ERROR: Could not Write Bytes")
         }
@@ -91,7 +90,7 @@ class SerialConnection(serialPort: String) {
 
     fun writeString(string: String) {
         try {
-            commPort.writeBytes(string.toByteArray(), string.count().toLong())
+            commPort.getOutputStream().write(string.toByteArray())
         } catch (e: IOException) {
             throw IOException("ERROR: Could not Write String")
         }

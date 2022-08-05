@@ -8,7 +8,7 @@
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  * 
  * Created: July 06, 2022
- * Updated: July 20, 2022
+ * Updated: August 04, 2022
  */
 
 package systems.codexmicro.neutron
@@ -26,7 +26,7 @@ import javax.script.ScriptException
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.TimeUnit
 import java.nio.charset.Charset
-import systems.codexmicro.neutron.util.ReadTerminator
+import systems.codexmicro.neutron.util.Terminator
 
 class PrologixEthernet(prologixURL: URL) {
     private var prologixURL: URL
