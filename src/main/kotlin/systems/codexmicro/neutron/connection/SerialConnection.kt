@@ -8,7 +8,7 @@
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  *
  * Created: July 20, 2022
- * Updated: August 05, 2022
+ * Updated: August 06, 2022
  */
 
 package systems.codexmicro.neutron.connection
@@ -24,7 +24,7 @@ import systems.codexmicro.neutron.util.ParityType
 import systems.codexmicro.neutron.util.StopBits
 import systems.codexmicro.neutron.util.Terminator
 
-class SerialConnection(serialPort: String) {
+class SerialConnection(serialPort: String, isPrologix: Boolean) {
     private var commPort: SerialPort
     private lateinit var inputStream: BufferedReader
     private lateinit var outputStream: BufferedWriter
@@ -37,9 +37,12 @@ class SerialConnection(serialPort: String) {
         }
         openConnection(commPort)
         defaultConfig(commPort, 115200, 8, ParityType.NONE, StopBits.ONE, FlowControl.NONE)
+        if (isPrologix == true) {
+            prologixConfig()
+        }
     }
 
-    fun defaultConfig(
+    private fun defaultConfig(
             serialPort: SerialPort,
             baudRate: Int,
             dataBits: Int,
@@ -51,6 +54,8 @@ class SerialConnection(serialPort: String) {
         serialPort.setComPortParameters(baudRate, dataBits, stopBits.toInt(), parityType.toInt())
         serialPort.setFlowControl(flowControl.toInt())
     }
+
+    private fun prologixConfig() {}
 
     fun getSerialPort(): SerialPort {
         return commPort
