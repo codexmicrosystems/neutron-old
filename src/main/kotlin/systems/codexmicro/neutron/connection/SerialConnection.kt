@@ -109,7 +109,16 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
         return terminateBytes(string.toByteArray(), terminator)
     }
 
-    fun readBytes(bufferSize: Int): ByteArray {}
+    // fun readBytes(bufferSize: Int): ByteArray {
+    //     var bytes:ArrayList<Byte> = ArrayList<Byte>()
+    //     var buffer: ByteArray = ByteArray(108)
+    //     var length: Int = commPort.getInputStream().available()
+
+    //     if (length > 0) {
+    //         length = commPort.getInputStream().read(buffer)
+    //     }
+    //     var bytesReturn: ByteArray = ByteArray(bytes.size)
+    // }
 
     fun readString() {}
 

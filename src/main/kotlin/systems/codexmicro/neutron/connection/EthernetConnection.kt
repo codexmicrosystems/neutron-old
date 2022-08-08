@@ -98,7 +98,7 @@ class EthernetConnection(ipAddress: URL, isPrologix: Boolean) {
         return terminateBytes(string.toByteArray(), terminator)
     }
 
-    fun readBytes(bufferSize: Int): ByteArray {}
+    // fun readBytes(bufferSize: Int): ByteArray {}
 
     fun readString() {}
 

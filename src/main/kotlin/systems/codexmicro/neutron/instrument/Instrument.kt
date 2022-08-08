@@ -11,41 +11,41 @@
  * Updated: July 21, 2022
  */
 
-package systems.codexmicro.neutron.instrument
+// package systems.codexmicro.neutron.instrument
 
-import systems.codexmicro.neutron.BusAddress
+// import systems.codexmicro.neutron.BusAddress
 
-class Instrument(instrumentName: String, busAddress: BusAddress) {
-    private var instrumentName: String
-    private var busAddress: BusAddress
-    private var poweredOn: Boolean = true
+// class Instrument(instrumentName: String, busAddress: BusAddress) {
+//     private var instrumentName: String
+//     private var busAddress: BusAddress
+//     private var poweredOn: Boolean = true
 
-    init {
-        this.instrumentName = instrumentName
-        this.busAddress = busAddress
-    }
+//     init {
+//         this.instrumentName = instrumentName
+//         this.busAddress = busAddress
+//     }
 
-    fun getInstrumentName(): String {
-        return instrumentName
-    }
+//     fun getInstrumentName(): String {
+//         return instrumentName
+//     }
 
-    fun setInstrumentName(instrumentName: String) {
-        this.instrumentName = instrumentName
-    }
+//     fun setInstrumentName(instrumentName: String) {
+//         this.instrumentName = instrumentName
+//     }
 
-    fun getBusAddress(): BusAddress {
-        return busAddress
-    }
+//     fun getBusAddress(): BusAddress {
+//         return busAddress
+//     }
 
-    fun setBusAddress(busAddress: BusAddress) {
-        this.busAddress = busAddress
-    }
+//     fun setBusAddress(busAddress: BusAddress) {
+//         this.busAddress = busAddress
+//     }
 
-    fun getPoweredOn() {
-        // TODO:
-    }
+//     fun getPoweredOn() {
+//         // TODO:
+//     }
 
-    fun setPoweredOn() {
-        // TODO:
-    }
-}
+//     fun setPoweredOn() {
+//         // TODO:
+//     }
+// }
