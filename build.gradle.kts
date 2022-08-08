@@ -39,7 +39,7 @@ dependencies {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "com.github.zagdrath"
+            groupId = "com.github.codexmicrosystems"
             artifactId = "neutron"
             version = "1.0.0"
 
