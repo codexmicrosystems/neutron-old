@@ -123,7 +123,7 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
     }
 
     fun readBytes(): ByteArray {
-        return commPort.getInputStream().readAllBytes()
+        return commPort.getInputStream().readBytes()
     }
 
     fun readString(): String {
