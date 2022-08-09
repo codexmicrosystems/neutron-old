@@ -115,11 +115,11 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
     }
 
     fun sendCommand(bytes: ByteArray, terminator: Terminator) {
-        writeBytes(terminateBytes(bytes, terminator))
+        this.writeBytes(this.terminateBytes(bytes, terminator))
     }
 
     fun sendCommand(string: String, terminator: Terminator) {
-        writeString(terminateString(string, terminator).toString())
+        this.writeString(this.terminateString(string, terminator).toString())
     }
 
     fun readBytes(): ByteArray {
