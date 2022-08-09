@@ -60,7 +60,7 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
 
     /* Default config for Prologix controller. */
     private fun prologixConfig() {
-        sendCommand(this, MODE_CMD + " 1", Terminator.LF) // Set prologix mode
+        sendCommand(MODE_CMD + " 1", Terminator.LF) // Set prologix mode
     }
 
     fun getSerialPort(): SerialPort {
@@ -117,12 +117,12 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
 
     // TODO: Figure out how to make this shit work.
     
-    fun sendCommand(serialConnection: SerialConnection, bytes: ByteArray, terminator: Terminator) {
-        serialConnection.writeBytes(serialConnection.terminateBytes(bytes, terminator))
+    fun sendCommand(bytes: ByteArray, terminator: Terminator) {
+        writeBytes(terminateBytes(bytes, terminator))
     }
 
-    fun sendCommand(serialConnection: SerialConnection, string: String, terminator: Terminator) {
-        serialConnection.writeString(serialConnection.terminateString(string, terminator).toString())
+    fun sendCommand(string: String, terminator: Terminator) {
+        writeString(terminateString(string, terminator).toString())
     }
 
     fun readBytes(): ByteArray {
