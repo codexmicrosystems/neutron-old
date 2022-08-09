@@ -25,6 +25,7 @@ import systems.codexmicro.neutron.util.ParityType
 import systems.codexmicro.neutron.util.StopBits
 import systems.codexmicro.neutron.util.Terminator
 import systems.codexmicro.neutron.util.prologixcommands.*
+import systems.codexmicro.neutron.connection.SerialConnection
 
 class SerialConnection(serialPort: String, isPrologix: Boolean) {
     private var commPort: SerialPort
@@ -59,7 +60,7 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
 
     /* Default config for Prologix controller. */
     private fun prologixConfig() {
-        sendCommand(MODE_CMD + " 1", Terminator.LF) // Set prologix mode
+        sendCommand(this, MODE_CMD + " 1", Terminator.LF) // Set prologix mode
     }
 
     fun getSerialPort(): SerialPort {
@@ -114,12 +115,14 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
         return terminateBytes(string.toByteArray(), terminator)
     }
 
-    fun sendCommand(bytes: ByteArray, terminator: Terminator) {
-        this.writeBytes(this.terminateBytes(bytes, terminator))
+    // TODO: Figure out how to make this shit work.
+    
+    fun sendCommand(serialConnection: SerialConnection, bytes: ByteArray, terminator: Terminator) {
+        serialConnection.writeBytes(serialConnection.terminateBytes(bytes, terminator))
     }
 
-    fun sendCommand(string: String, terminator: Terminator) {
-        this.writeString(this.terminateString(string, terminator).toString())
+    fun sendCommand(serialConnection: SerialConnection, string: String, terminator: Terminator) {
+        serialConnection.writeString(serialConnection.terminateString(string, terminator).toString())
     }
 
     fun readBytes(): ByteArray {
