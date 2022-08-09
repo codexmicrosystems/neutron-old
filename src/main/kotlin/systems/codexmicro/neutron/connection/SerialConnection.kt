@@ -25,7 +25,6 @@ import systems.codexmicro.neutron.util.ParityType
 import systems.codexmicro.neutron.util.StopBits
 import systems.codexmicro.neutron.util.Terminator
 import systems.codexmicro.neutron.util.prologixcommands.*
-import systems.codexmicro.neutron.connection.SerialConnection
 
 class SerialConnection(serialPort: String, isPrologix: Boolean) {
     private var commPort: SerialPort
@@ -124,6 +123,8 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
     fun sendCommand(string: String, terminator: Terminator) {
         writeString(terminateString(string, terminator).toString())
     }
+
+    // TODO: Figgure out how to read from the serial.
 
     fun readBytes(): ByteArray {
         return commPort.getInputStream().readBytes()
