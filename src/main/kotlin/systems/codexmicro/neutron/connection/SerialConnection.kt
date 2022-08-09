@@ -14,6 +14,7 @@
 package systems.codexmicro.neutron.connection
 
 import com.fazecast.jSerialComm.SerialPort
+import java.nio.ByteBuffer
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.IOException
@@ -23,6 +24,7 @@ import systems.codexmicro.neutron.util.FlowControl
 import systems.codexmicro.neutron.util.ParityType
 import systems.codexmicro.neutron.util.StopBits
 import systems.codexmicro.neutron.util.Terminator
+import systems.codexmicro.neutron.util.prologixcommands.*
 
 class SerialConnection(serialPort: String, isPrologix: Boolean) {
     private var commPort: SerialPort
@@ -55,7 +57,10 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
         serialPort.setFlowControl(flowControl.toInt())
     }
 
-    private fun prologixConfig() {}
+    /* Default config for Prologix controller. */
+    private fun prologixConfig() {
+        sendCommand(MODE_CMD + " 1", Terminator.LF) // Set prologix mode
+    }
 
     fun getSerialPort(): SerialPort {
         return commPort
@@ -109,18 +114,21 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
         return terminateBytes(string.toByteArray(), terminator)
     }
 
-    // fun readBytes(bufferSize: Int): ByteArray {
-    //     var bytes:ArrayList<Byte> = ArrayList<Byte>()
-    //     var buffer: ByteArray = ByteArray(108)
-    //     var length: Int = commPort.getInputStream().available()
+    fun sendCommand(bytes: ByteArray, terminator: Terminator) {
+        writeBytes(terminateBytes(bytes, terminator))
+    }
 
-    //     if (length > 0) {
-    //         length = commPort.getInputStream().read(buffer)
-    //     }
-    //     var bytesReturn: ByteArray = ByteArray(bytes.size)
-    // }
+    fun sendCommand(string: String, terminator: Terminator) {
+        writeString(terminateString(string, terminator).toString())
+    }
 
-    fun readString() {}
+    fun readBytes(): ByteArray {
+        return commPort.getInputStream().readAllBytes()
+    }
+
+    fun readString(): String {
+        return readBytes().toString()
+    }
 
     fun clearBuffer() {}
 }
