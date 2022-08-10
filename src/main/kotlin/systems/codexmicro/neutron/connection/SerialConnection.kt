@@ -8,13 +8,12 @@
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  *
  * Created: July 20, 2022
- * Updated: August 06, 2022
+ * Updated: August 10, 2022
  */
 
 package systems.codexmicro.neutron.connection
 
 import com.fazecast.jSerialComm.SerialPort
-import java.nio.ByteBuffer
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.IOException
@@ -24,9 +23,8 @@ import systems.codexmicro.neutron.util.FlowControl
 import systems.codexmicro.neutron.util.ParityType
 import systems.codexmicro.neutron.util.StopBits
 import systems.codexmicro.neutron.util.Terminator
-import systems.codexmicro.neutron.util.prologixcommands.*
 
-class SerialConnection(serialPort: String, isPrologix: Boolean) {
+class SerialConnection(serialPort: String) {
     private var commPort: SerialPort
     private lateinit var inputStream: BufferedReader
     private lateinit var outputStream: BufferedWriter
@@ -39,9 +37,6 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
         }
         openConnection(commPort)
         defaultConfig(commPort, 115200, 8, ParityType.NONE, StopBits.ONE, FlowControl.NONE)
-        if (isPrologix == true) {
-            prologixConfig()
-        }
     }
 
     private fun defaultConfig(
@@ -55,11 +50,6 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
         serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0)
         serialPort.setComPortParameters(baudRate, dataBits, stopBits.toInt(), parityType.toInt())
         serialPort.setFlowControl(flowControl.toInt())
-    }
-
-    /* Default config for Prologix controller. */
-    private fun prologixConfig() {
-        sendCommand(MODE_CMD + " 1", Terminator.LF) // Set prologix mode
     }
 
     fun getSerialPort(): SerialPort {
@@ -115,13 +105,21 @@ class SerialConnection(serialPort: String, isPrologix: Boolean) {
     }
 
     // TODO: Figure out how to make this shit work.
-    
+
     fun sendCommand(bytes: ByteArray, terminator: Terminator) {
-        writeBytes(terminateBytes(bytes, terminator))
+        try {
+            commPort.getOutputStream().write(bytes + terminator.toByte())
+        } catch (e: IOException) {
+            throw IOException("ERROR: Could not Send Command")
+        }
     }
 
     fun sendCommand(string: String, terminator: Terminator) {
-        writeString(terminateString(string, terminator).toString())
+        try {
+            commPort.getOutputStream().write(string.toByteArray() + terminator.toByte())
+        } catch (e: IOException) {
+            throw IOException("ERROR: Could not Send Command")
+        }
     }
 
     // TODO: Figgure out how to read from the serial.
