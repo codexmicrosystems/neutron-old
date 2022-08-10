@@ -104,8 +104,6 @@ class SerialConnection(serialPort: String) {
         return terminateBytes(string.toByteArray(), terminator)
     }
 
-    // TODO: Figure out how to make this shit work.
-
     fun sendCommand(bytes: ByteArray, terminator: Terminator) {
         try {
             commPort.getOutputStream().write(bytes + terminator.toByte())
@@ -122,15 +120,46 @@ class SerialConnection(serialPort: String) {
         }
     }
 
-    // TODO: Figgure out how to read from the serial.
+    // TODO: Figure out how to read from the serial.
 
     fun readBytes(): ByteArray {
-        return commPort.getInputStream().readBytes()
+        var answer: ArrayList<Byte> = ArrayList<Byte>()
+        var attempts: Int = 0
+        var buffer: ByteArray = ByteArray(108)
+        var timeout: Int = 250
+        try {
+            do {
+                var length: Int = commPort.getInputStream().available()
+                if (length > 0) {
+                    length = commPort.getInputStream().read(buffer)
+                    for (i in 0 until length) {
+                        answer.add(buffer[i])
+                    }
+                    attempts = 0
+                } else {
+                    attempts++
+                    if (attempts < 2) {
+                        try {
+                            Thread.sleep(timeout.toLong())
+                        } catch (e: InterruptedException) {
+                            throw InterruptedException("ERROR: Interrupted")
+                        }
+                    }
+                }
+            } while (attempts < 2)
+        } catch (e: IOException) {
+            throw IOException("ERROR: Could not Read Bytes")
+        }
+        var ret: ByteArray = ByteArray(answer.size)
+        for (i in 0 until answer.size) {
+            ret[i] = answer.get(i)
+        }
+        return ret
     }
 
-    fun readString(): String {
-        return readBytes().toString()
-    }
+    // fun readString(): String {
+    //     return readBytes().toString()
+    // }
 
     fun clearBuffer() {}
 }
