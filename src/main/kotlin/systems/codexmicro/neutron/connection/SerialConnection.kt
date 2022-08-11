@@ -123,7 +123,7 @@ class SerialConnection(serialPort: String) {
     // TODO: Figure out how to read from the serial.
 
     fun readBytes(): ByteArray {
-        return commPort.getInputStream().readNBytes(108)
+        return commPort.getInputStream().readAllBytes()
     }
 
     // fun readString(): String {
