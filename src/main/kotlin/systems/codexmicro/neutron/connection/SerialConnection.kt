@@ -8,7 +8,7 @@
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  *
  * Created: July 20, 2022
- * Updated: August 10, 2022
+ * Updated: November 02, 2022
  */
 
 package systems.codexmicro.neutron.connection
@@ -47,6 +47,7 @@ class SerialConnection(serialPort: String) {
             stopBits: StopBits,
             flowControl: FlowControl
     ) {
+        // TODO: Make it so the serial port params are able to be changed.
         serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0)
         serialPort.setComPortParameters(baudRate, dataBits, stopBits.toInt(), parityType.toInt())
         serialPort.setFlowControl(flowControl.toInt())
@@ -122,9 +123,7 @@ class SerialConnection(serialPort: String) {
 
     // TODO: Figure out how to read from the serial.
 
-    fun readBytes(): ByteArray {
-        return commPort.getInputStream().readAllBytes()
-    }
+    // fun readBytes(): ByteArray {}
 
     // fun readString(): String {
     //     return readBytes().toString()
