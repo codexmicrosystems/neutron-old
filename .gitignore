@@ -1,4 +1,7 @@
-# Ignore Gradle Directories
+# Ignore gradle directories
 .gradle/
 build/
 bin/
+
+# Ignore code editor settings
+.vscode/
