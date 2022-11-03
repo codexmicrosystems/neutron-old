@@ -11,20 +11,20 @@
  * Updated: July 21, 2022
  */
 
-import com.fazecast.jSerialComm.SerialPort
-import systems.codexmicro.neutron.connection.SerialConnection
-import systems.codexmicro.neutron.connection.ConnectionType
+// import com.fazecast.jSerialComm.SerialPort
+// import systems.codexmicro.neutron.connection.SerialConnection
+// import systems.codexmicro.neutron.connection.ConnectionType
 
-package systems.codexmicro.neutron.connection
+// package systems.codexmicro.neutron.connection
 
-class Connection(connectionType: ConnectionType, serialPort: SerialPort) {
-    private var connectionType: ConnectionType
+// class Connection(connectionType: ConnectionType, serialPort: SerialPort) {
+//     private var connectionType: ConnectionType
     
-    init {
-        this.connectionType = connectionType
-        // TODO: Error handling
-        if (connectionType == ConnectionType.SERIAL) {
-            var serialConnection: SerialConnection = SerialConnection(serialPort.toString())
-        }
-    }
-}
+//     init {
+//         this.connectionType = connectionType
+//         // TODO: Error handling
+//         if (connectionType == ConnectionType.SERIAL) {
+//             var serialConnection: SerialConnection = SerialConnection(serialPort.toString())
+//         }
+//     }
+// }
