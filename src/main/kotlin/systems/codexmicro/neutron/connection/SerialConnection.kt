@@ -8,7 +8,7 @@
  * Author: Cody L. Wellman <cody@codexmicro.systems>
  *
  * Created: July 20, 2022
- * Updated: November 02, 2022
+ * Updated: November 03, 2022
  */
 
 package systems.codexmicro.neutron.connection
@@ -131,7 +131,7 @@ class SerialConnection(serialPort: String) {
 
     fun readString(): String {
         try {
-            return Character.toString(readBytes())
+            return Character.toString(readBytes().toChar())
         } catch (e: IOException) {
             throw IOException("ERROR: Could not Read String")
         }
