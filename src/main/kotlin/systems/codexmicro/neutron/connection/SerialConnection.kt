@@ -121,21 +121,21 @@ class SerialConnection(serialPort: String) {
         }
     }
 
-    // TODO: Figure out how to read from the serial.
-
     fun readBytes(): Int {
         try {
-            while (true) {
-                return commPort.getInputStream().read()
-            }
+            return commPort.getInputStream().read()
         } catch (e: IOException) {
             throw IOException("ERROR: Could not Read Bytes")
         }
     }
 
-    // fun readString(): String {
-    //     return readBytes().toString()
-    // }
+    fun readString(): String {
+        try {
+            return Character.toString(readBytes())
+        } catch (e: IOException) {
+            throw IOException("ERROR: Could not Read String")
+        }
+    }
 
     fun clearBuffer() {}
 }
