@@ -144,18 +144,19 @@ class SerialConnection(serialPort: String) {
     }
 
     fun readBytes(readTimes: Int): Int {
-        var readBytesReturn: Int
+        var readBytesReturn: Int = 0
         var matchesFound: Int = 0
         try {
+            var matcher: Matcher = Pattern.compile("1310").matcher(readBytesReturn.toString())
+            while (matcher.find()) {
+                matchesFound++
+            }
+
             while (true) {
                 readBytesReturn = commPort.getInputStream().read()
                 if (matchesFound == readTimes) {
                     break
                 }
-            }
-            var matcher: Matcher = Pattern.compile("1310").matcher(readBytesReturn.toString())
-            while (matcher.find()) {
-                matchesFound++
             }
             return readBytesReturn
         } catch (e: IOException) {
