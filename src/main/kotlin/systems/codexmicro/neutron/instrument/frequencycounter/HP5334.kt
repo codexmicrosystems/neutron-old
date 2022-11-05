@@ -174,93 +174,95 @@ class HP5334(serialConnection: SerialConnection, busAddress: String) {
     }
 
     // Function/data command group
-    fun getFrequency(instrumentInput: String, readTimes: Int): String {
+    fun getFrequency(instrumentInput: String): String {
         lateinit var returnFrequency: String
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         if (instrumentInput == "A") {
             serialConnection.sendCommand(FUNCTION_CMD + "1", Terminator.LF)
-            returnFrequency = serialConnection.readString(readTimes)
+            returnFrequency = serialConnection.readString()
         } else if (instrumentInput == "B") {
             serialConnection.sendCommand(FUNCTION_CMD + "2", Terminator.LF)
-            returnFrequency = serialConnection.readString(readTimes)
+            returnFrequency = serialConnection.readString()
         } else if (instrumentInput == "C") {
             serialConnection.sendCommand(FUNCTION_CMD + "3", Terminator.LF)
-            returnFrequency = serialConnection.readString(readTimes)
+            returnFrequency = serialConnection.readString()
         } else {
             println("[ERROR] Instrument Input Invalid")
         }
         return returnFrequency
     }
 
-    fun getPeriod(readTimes: Int): String {
+    fun getPeriod(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(FUNCTION_CMD + "4", Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
-    fun getTimeIntervalAB(readTimes: Int): String {
+    fun getTimeIntervalAB(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(FUNCTION_CMD + "5", Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
-    fun getTimeIntervalABDelay(readTimes: Int): String {
+    fun getTimeIntervalABDelay(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(FUNCTION_CMD + "6", Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
-    fun getRatioAB(readTimes: Int): String {
+    fun getRatioAB(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(FUNCTION_CMD + "7", Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
-    fun getTotalizeStop(readTimes: Int): String {
+    fun getTotalizeStop(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(FUNCTION_CMD + "8", Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
-    fun getTotalizeStart(readTimes: Int): String {
+    fun getTotalizeStart(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(FUNCTION_CMD + "9", Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
-    fun getPulseWidthA(readTimes: Int): String {
+    fun getPulseWidthA(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(FUNCTION_CMD + "10", Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
-    fun getRiseFallTimeA(readTimes: Int): String {
+    fun getRiseFallTimeA(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(FUNCTION_CMD + "11", Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
-    fun getDVM(readTimes: Int): String {
+    fun getDVM(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(FUNCTION_CMD + "12", Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
-    fun getTriggerLevels(readTimes: Int): String {
+    fun getTriggerLevels(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(FUNCTION_CMD + "13", Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
-    fun getChannelPeaks(instrumentInput: String, readTimes: Int): String {
+    fun getChannelPeaks(
+            instrumentInput: String,
+    ): String {
         lateinit var returnChannelPeaks: String
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         if (instrumentInput == "A") {
             serialConnection.sendCommand(FUNCTION_CMD + "14", Terminator.LF)
-            returnChannelPeaks = serialConnection.readString(readTimes)
+            returnChannelPeaks = serialConnection.readString()
         } else if (instrumentInput == "B") {
             serialConnection.sendCommand(FUNCTION_CMD + "15", Terminator.LF)
-            returnChannelPeaks = serialConnection.readString(readTimes)
+            returnChannelPeaks = serialConnection.readString()
         } else {
             println("[ERROR] Instrument Input Invalid")
         }
@@ -339,10 +341,10 @@ class HP5334(serialConnection: SerialConnection, busAddress: String) {
         }
     }
 
-    fun getDeviceID(readTimes: Int): String {
+    fun getDeviceID(): String {
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         serialConnection.sendCommand(ID_CMD, Terminator.LF)
-        return serialConnection.readString(readTimes)
+        return serialConnection.readString()
     }
 
     fun initalize() {

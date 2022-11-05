@@ -19,8 +19,6 @@ import java.io.BufferedWriter
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 import systems.codexmicro.neutron.util.FlowControl
 import systems.codexmicro.neutron.util.ParityType
 import systems.codexmicro.neutron.util.StopBits
@@ -143,42 +141,21 @@ class SerialConnection(serialPort: String) {
         }
     }
 
-    fun readBytes(readTimes: Int): Int {
-        var readBytesReturn: Int = 0
-        var matchesFound: Int = 0
+    fun readBytes(): Int {
         try {
-            var matcher: Matcher = Pattern.compile("1310").matcher(readBytesReturn.toString())
-            while (matcher.find()) {
-                matchesFound++
-            }
-
-            while (true) {
-                readBytesReturn = commPort.getInputStream().read()
-                if (matchesFound == readTimes) {
-                    break
-                }
-            }
-            return readBytesReturn
+            return commPort.getInputStream().read()
         } catch (e: IOException) {
             throw IOException("ERROR: Could not Read Bytes")
         }
     }
 
-    // fun readBytes(): Int {
-    //     try {
-    //         return commPort.getInputStream().read()
-    //     } catch (e: IOException) {
-    //         throw IOException("ERROR: Could not Read Bytes")
-    //     }
-    // }
-
     // TODO: Write detection of terminator and allow reading n times.
     // Counter that counts n times of reading CR & LF and then
     // breaks the loop?
 
-    fun readString(readTimes: Int): String {
+    fun readString(): String {
         try {
-            return Character.toString(readBytes(readTimes).toChar())
+            return Character.toString(readBytes().toChar())
         } catch (e: IOException) {
             throw IOException("ERROR: Could not Read String")
         }
