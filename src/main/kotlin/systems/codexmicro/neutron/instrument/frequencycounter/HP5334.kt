@@ -174,12 +174,12 @@ class HP5334(serialConnection: SerialConnection, busAddress: String) {
     }
 
     // Function/data command group
-    fun getFrequency(instrumentInput: String): String {
+    fun getFrequency(instrumentInput: String, readTimes: Int): String {
         lateinit var returnFrequency: String
         serialConnection.sendCommand(ADDR_CMD + busAddress, Terminator.LF)
         if (instrumentInput == "A") {
             serialConnection.sendCommand(FUNCTION_CMD + "1", Terminator.LF)
-            returnFrequency = serialConnection.readString()
+            repeat(readTimes) { returnFrequency = serialConnection.readString() }
         } else if (instrumentInput == "B") {
             serialConnection.sendCommand(FUNCTION_CMD + "2", Terminator.LF)
             returnFrequency = serialConnection.readString()
