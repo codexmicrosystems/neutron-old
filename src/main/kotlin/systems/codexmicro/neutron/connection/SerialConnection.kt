@@ -28,6 +28,14 @@ class SerialConnection(serialPort: String) {
     private var commPort: SerialPort
     private lateinit var inputStream: BufferedReader
     private lateinit var outputStream: BufferedWriter
+    private var timeoutMode: Int = SerialPort.TIMEOUT_READ_SEMI_BLOCKING
+    private var readTimeout: Int = 0
+    private var writeTimeout: Int = 0
+    private var baudRate: Int = 115200
+    private var dataBits: Int = 8
+    private var parityType: ParityType = ParityType.NONE
+    private var stopBits: StopBits = StopBits.ONE
+    private var flowControl: FlowControl = FlowControl.NONE
 
     init {
         try {
@@ -36,21 +44,29 @@ class SerialConnection(serialPort: String) {
             throw IllegalArgumentException("ERROR: Invalid Serial Port")
         }
         openConnection(commPort)
-        defaultConfig(commPort, 115200, 8, ParityType.NONE, StopBits.ONE, FlowControl.NONE)
+        commPort.setComPortTimeouts(timeoutMode, readTimeout, writeTimeout)
+        commPort.setComPortParameters(baudRate, dataBits, stopBits.toInt(), parityType.toInt())
+        commPort.setFlowControl(flowControl.toInt())
     }
 
-    private fun defaultConfig(
-            serialPort: SerialPort,
+    fun setSerialParams(
             baudRate: Int,
             dataBits: Int,
             parityType: ParityType,
             stopBits: StopBits,
             flowControl: FlowControl
     ) {
-        // TODO: Make it so the serial port params are able to be changed.
-        serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0)
-        serialPort.setComPortParameters(baudRate, dataBits, stopBits.toInt(), parityType.toInt())
-        serialPort.setFlowControl(flowControl.toInt())
+        this.baudRate = baudRate
+        this.dataBits = dataBits
+        this.parityType = parityType
+        this.stopBits = stopBits
+        this.flowControl = flowControl
+    }
+
+    fun setSerialTimeouts(timeoutMode: Int, readTimeout: Int, writeTimeout: Int) {
+        this.timeoutMode = timeoutMode
+        this.readTimeout = readTimeout
+        this.writeTimeout = writeTimeout
     }
 
     fun getSerialPort(): SerialPort {
@@ -60,6 +76,10 @@ class SerialConnection(serialPort: String) {
     fun setSerialPort(serialPort: SerialPort) {
         this.commPort = serialPort
     }
+
+    // TODO: Move serialPort.openPort() and .closePort() into try-catch
+    // Change commPort.getOutputStream() and commPort.getInputStream()
+    // to inputStream and outputStream variables
 
     fun openConnection(serialPort: SerialPort) {
         try {
@@ -129,6 +149,10 @@ class SerialConnection(serialPort: String) {
         }
     }
 
+    // TODO: Write detection of terminator and allow reading n times.
+    // Counter that counts n times of reading CR & LF and then
+    // breaks the loop?
+
     fun readString(): String {
         try {
             return Character.toString(readBytes().toChar())
@@ -136,6 +160,4 @@ class SerialConnection(serialPort: String) {
             throw IOException("ERROR: Could not Read String")
         }
     }
-
-    fun clearBuffer() {}
 }
